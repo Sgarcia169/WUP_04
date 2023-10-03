@@ -52,21 +52,38 @@ ggplot(data=GSS, aes( x = DEGREE, y = WORDSUM)) +
 
 ```
 
-
+The box plot indicates that the average score for the WORDSUM is the same for junior college and bachelor degrees. Graduate has the highest average score compared to the rest. Compared to high school and LT high schools with the lowest average scores. 
 
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ```{r}
-favstats(momheight~Sex,data=ucdavis1)
+favstats(WORDSUM~DEGREE, data=GSS)
 ```
+
+According to numerical result, the graduate degree category had the highest scoring mean compared to the rest. Following close behind is the bachelor and junior college degree graduate that had an average mean of 9. Where the high school and LT high school 
 
 ## Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+model1 <- aov(WORDSUM~DEGREE,data=GSS)
+summary.aov(model1)
+```
+
+This shows the P value is less than 0.05, so we reject the null hypothesis. This indicates that there is a difference in WORDSUM tests compared to the level of degree. 
+
+```{r}
+plot(TukeyHSD(model1)) 
+print(TukeyHSD(model1))
+```
+
+We do have evidence that there is a difference in levels of degree and the WORDSUM score. The biggest difference is the higher the education is directly related to higher WORDSUM score. If the line doesn't intersect the 0 line interval, that means there is no difference in test scores. 
 
 # Discussion and Conclusion
 
-<!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+<!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variables causes the other, or whether they perhaps are related for some other reason.  Watch the chapter 6 videos from the George Town videos collection.!-->
+
+Is there difference between the average score on the WORDSUM test and level of schooling DEGREE?  After screening the information, the data indicates that there is a difference between the education level and scores for WORDSUM test. The graphical result show the higher educated individuals tested higher and the P value is below 0.05 and we then rejected the null hypothesis. The result is that there is a difference between the college level degree and the the test scores for WORDSUM. 
